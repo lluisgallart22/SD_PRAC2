@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package distributedstore;
+
+service KeyValueStore {
+  rpc put(PutRequest) returns (PutResponse);
+
+  rpc get(GetRequest) returns (GetResponse);
+
+  rpc slowDown(SlowDownRequest) returns (SlowDownResponse);
+
+  rpc restore(RestoreRequest) returns (RestoreResponse);
+
+  rpc canCommit(CanCommitRequest) returns (CanCommitResponse);
+
+  rpc doCommit(DoCommitRequest) returns (DoCommitResponse);
+
+  rpc doAbort(DoAbortRequest) returns (DoAbortResponse);
+
+  rpc haveCommited(HaveCommittedRequest) returns (HaveCommittedResponse);
+
+  rpc askVote(VoteRequest) returns (VoteResponse);
+
+  rpc hasQuorum(PutRequest) returns (PutResponse);
+
+  rpc doCommitRemote(DoCommitRemoteRequest) returns (DoCommitRemoteResponse);
+
+  rpc canCommitRemote(CanCommitRemoteRequest) returns (CanCommitRemoteResponse);
+
+}
+
+message PutRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message PutResponse {
+  bool success = 1;
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetResponse {
+  string value = 1;
+  bool found = 2;
+}
+
+message SlowDownRequest {
+  int32 seconds = 1;
+}
+
+message SlowDownResponse {
+  bool success = 1;
+}
+
+message RestoreRequest {}
+
+message RestoreResponse {
+  bool success = 1;
+}
+
+message CanCommitRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message CanCommitResponse {
+  bool vote = 1;
+}
+
+message CanCommitRemoteRequest {
+    string key = 1;
+    string value = 2;
+}
+
+message CanCommitRemoteResponse {
+    bool vote = 1;
+}
+
+message DoCommitRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message DoCommitResponse {
+  bool success = 1;
+}
+
+message DoCommitRemoteRequest {
+    string key = 1;
+    string value = 2;
+}
+
+message DoCommitRemoteResponse {
+    bool success = 1;
+}
+
+message DoAbortRequest {
+  string key = 1;
+}
+
+message DoAbortResponse {
+  bool success = 1;
+}
+
+message HaveCommittedRequest {
+  string key = 1;
+}
+
+message HaveCommittedResponse {
+  bool success = 1;
+}
+
+message Empty {
+    
+}
+
+message VoteRequest {
+  string key = 1;
+}
+
+message VoteResponse {
+  int32 vote = 1;
+}

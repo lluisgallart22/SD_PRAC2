@@ -1,0 +1,10 @@
+nodes:
+  - ip: "127.0.0.1"
+    port: 32770
+    weight: 1
+  - ip: "127.0.0.1"
+    port: 32771
+    weight: 2
+  - ip: "127.0.0.1"
+    port: 32772
+    weight: 1
